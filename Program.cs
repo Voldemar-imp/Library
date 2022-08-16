@@ -127,6 +127,7 @@ namespace library
         public void FindByTitle()
         {
             bool isFound = false;
+            
             Console.WriteLine("Введите имя автора, книги которого хотите найти:");
             string userInput = Console.ReadLine();
             Console.WriteLine("Книги написанные " + userInput + ":");
@@ -149,6 +150,7 @@ namespace library
         public void FindByAuthor()
         {
             bool isFound = false;
+            
             Console.WriteLine("Введите имя автора, книги которого хотите найти:");
             string userInput = Console.ReadLine();
             Console.WriteLine("Книги написанные " + userInput + ":");
@@ -171,6 +173,7 @@ namespace library
         public void FindByPublicationDate()
         {
             bool isFound = false;
+            
             Console.WriteLine("Введите год издания книг, которые хотите найти:");
             string userInput = Console.ReadLine();
             Console.WriteLine("Книги изданные в " + userInput + " году:");
@@ -193,7 +196,8 @@ namespace library
         public void FindByPublishingHous()
         {
             bool isFound = false;
-            Console.WriteLine("Введите издательство книг, которые хотите найти:");
+            
+            Console.WriteLine("Введите издательство, книги которого хотите найти:");
             string userInput = Console.ReadLine();
             Console.WriteLine("Книги выпущенные в издательстве " + userInput + ":");
 

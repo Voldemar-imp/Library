@@ -126,7 +126,7 @@ namespace library
 
         public void FindByTitle()
         {
-            Console.WriteLine("Введите имя автора, книги которого хотите найти:");
+            Console.WriteLine("Введите название книги которую хотите найти:");
             string userInput = Console.ReadLine();
             Console.WriteLine("Книги написанные " + userInput + ":");
             FindByType(userInput, SearchType.Title);
@@ -151,7 +151,7 @@ namespace library
 
         public void FindByPublishingHous()
         {
-            Console.WriteLine("Введите издательство книг, которые хотите найти:");
+            Console.WriteLine("Введите издательство, книги которого хотите найти:");
             string userInput = Console.ReadLine();
             Console.WriteLine("Книги выпущенные в издательстве " + userInput + ":");
             FindByType(userInput, SearchType.PublishingHous); 

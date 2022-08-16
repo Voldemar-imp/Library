@@ -169,32 +169,29 @@ namespace library
 
         private void FindByType(string userInput, SearchType type)
         {
-            bool isFound = false;
+           bool isFound = true;
 
             foreach (Book book in books)
             {
                 if (book.Title == userInput && type == SearchType.Title)
                 {
                     book.ShowInfo();
-                    isFound = true;
                 }
-
-                if (book.Author == userInput && type == SearchType.Author)
+                else if (book.Author == userInput && type == SearchType.Author)
                 {
                     book.ShowInfo();
-                    isFound = true;
                 }
-
-                if (book.PublicationDate == userInput && type == SearchType.PublicationDate)
+                else if(book.PublicationDate == userInput && type == SearchType.PublicationDate)
                 {
                     book.ShowInfo();
-                    isFound = true;
                 }
-
-                if (book.PublishingHous == userInput && type == SearchType.PublishingHous)
+                else if(book.PublishingHous == userInput && type == SearchType.PublishingHous)
                 {
                     book.ShowInfo();
-                    isFound = true;
+                }
+                else
+                {
+                    isFound = false;
                 }
             }
 

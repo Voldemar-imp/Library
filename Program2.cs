@@ -241,7 +241,8 @@ namespace library
                             sortBooks.Add(list[i]);
                         }
                     }
-                }
+                }     
+                
                 previousValue = value;
             }
 
@@ -273,9 +274,10 @@ namespace library
                 {
                     searchList.Add(_books[counter]);
                 }
+                
                 counter++;
             }
-
+            
             return searchList;
         }
     }

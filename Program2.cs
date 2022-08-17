@@ -185,7 +185,6 @@ namespace library
             ShowByAge (_books);
         }
 
-
         public void ShowInfo()
         {
             Console.WriteLine("На моей книжной полке сейчас:");

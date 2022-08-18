@@ -45,7 +45,7 @@ namespace library
                         library.FindByPublishingHous();
                         break;
                     case '7':
-                        library.ShowSortByAgeBooks();
+                        library.ShowSortedBooks();
                         break;
                     case '8':
                         library.ShowInfo();
@@ -94,31 +94,9 @@ namespace library
             }
             else
             {
-                bool isFound = false;
-                Book bookToRemove = null;
-
-                Console.WriteLine("Введите название книги которую хоттите убрать с полки:");
-                string userInput = Console.ReadLine();
-
-                foreach (Book book in _books)
-                {
-                    if (book.Title == userInput)
-                    {
-                        bookToRemove = book;
-                        isFound = true;
-                    }
-                }
-
-                if (isFound)
-                {
-                    _books.Remove(bookToRemove);
-                }
-                else
-                { 
-                    Console.WriteLine($"Книги с названием {userInput} на полке нет");
-                }
+                _books.Remove(GetBookToRemove());
             }
-        }
+        }        
 
         public void FindByTitle()
         {
@@ -180,7 +158,7 @@ namespace library
             ShowByAge(FindByType(userInput, publishingHous));
         }
 
-        public void ShowSortByAgeBooks()
+        public void ShowSortedBooks()
         {
             ShowByAge (_books);
         }
@@ -188,12 +166,8 @@ namespace library
         public void ShowInfo()
         {
             Console.WriteLine("На моей книжной полке сейчас:");
-
-            foreach (Book book in _books)
-            {
-                book.ShowInfo();
-            }
-        }
+            ShowList(_books);
+        }       
 
         private void ShowList(List<Book> list)
         {
@@ -210,42 +184,43 @@ namespace library
             }           
         }
 
-        private void ShowByAge(List<Book> list)
+        private void ShowByAge(List<Book> listOfBooks)
         {
             List<string> publicationDate = new List<string>(0);
 
-            foreach (Book book in list)
+            foreach (Book book in listOfBooks)
             {
                 publicationDate.Add(book.PublicationDate);
             }
 
-            ShowList(SortByAge(publicationDate, list));
+            ShowList(SortByAge(publicationDate, listOfBooks));
         }
 
-        private List<Book> SortByAge(List<string> values, List<Book> list)
+        private List<Book> SortByAge(List<string> publicationDate, List<Book> listOfBooks)
         {
             List<Book> sortBooks = new List<Book>(0);
-            string previousValue = null;
+            string previousDate = null;
 
-            values.Sort();
+            publicationDate.Sort();
 
-            foreach (string value in values)
+            foreach (string date in publicationDate)
             {
-                if (previousValue != value)
+                if (previousDate != date)
                 {
-                    for (int i = 0; i < list.Count; i++)
+                    for (int i = 0; i < listOfBooks.Count; i++)
                     {
-                        if (value == list[i].PublicationDate)
+                        if (date == listOfBooks[i].PublicationDate)
                         {
-                            sortBooks.Add(list[i]);
+                            sortBooks.Add(listOfBooks[i]);
                         }
                     }
-                }     
+                }
                 
-                previousValue = value;
+                previousDate = date;
             }
 
-            return sortBooks;
+            listOfBooks = sortBooks;
+            return listOfBooks;
         }
 
         private Book GetNewBook()
@@ -262,6 +237,29 @@ namespace library
             return new Book(title, author, publicationDate, publishingHous);
         }
 
+        private Book GetBookToRemove()
+        {
+            Book bookToRemove = null;
+
+            Console.WriteLine("Введите название книги которую хоттите убрать с полки:");
+            string userInput = Console.ReadLine();
+
+            foreach (Book book in _books)
+            {
+                if (book.Title == userInput)
+                {
+                    bookToRemove = book;
+                }
+            }
+
+            if (bookToRemove == null)
+            {
+                Console.WriteLine($"Книги {userInput} на полке нет.");
+            }
+
+            return bookToRemove;
+        }
+
         private List<Book> FindByType(string userInput, List<string> values)
         {
             List<Book> searchList = new List<Book>(0);
@@ -273,10 +271,10 @@ namespace library
                 {
                     searchList.Add(_books[counter]);
                 }
-                
+
                 counter++;
             }
-            
+
             return searchList;
         }
     }
